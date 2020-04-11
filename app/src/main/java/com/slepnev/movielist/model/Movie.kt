@@ -7,7 +7,7 @@ data class Movie(
     @SerializedName("backdrop_path") var backdropImage: String,
     @SerializedName("poster_path") var posterImage: String,
     @SerializedName("release_date") var releaseDate: String,
-    @SerializedName("vote_average") var rating: Int,
+    @SerializedName("vote_average") var rating: Float,
     @SerializedName("overview") var overview: String
 ) {
     fun getBackdropUrl() = "https://image.tmdb.org/t/p/w300/$backdropImage"
