@@ -1,7 +1,8 @@
-package com.slepnev.movielist
+package com.slepnev.movielist.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.slepnev.movielist.R
 
 class MainActivity : AppCompatActivity() {
 
