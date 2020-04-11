@@ -8,7 +8,7 @@ import retrofit2.create
 
 class MoviesApi {
     companion object {
-        private const val baseUrl = "https://developers.themoviedb.org/"
+        private const val baseUrl = "https://api.themoviedb.org"
 
         /**
          * @return [MoviesApiService] The service class off the retrofit client.
