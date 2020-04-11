@@ -10,6 +10,6 @@ data class Movie(
     @SerializedName("vote_average") var rating: Int,
     @SerializedName("overview") var overview: String
 ) {
-    fun getBackdropUrl() = "https://image.tmdb.org/t/p/w185/$backdropImage"
+    fun getBackdropUrl() = "https://image.tmdb.org/t/p/w300/$backdropImage"
     fun getPosterUrl() = "https://image.tmdb.org/t/p/w185/$posterImage"
 }
