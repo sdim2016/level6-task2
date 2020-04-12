@@ -3,6 +3,7 @@ package com.slepnev.movielist.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -44,8 +45,14 @@ class MainActivity : AppCompatActivity() {
             movies.addAll(it.movies)
             movieAdapter.notifyDataSetChanged()
         })
+
         viewModel.error.observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        })
+
+        viewModel.progressBarStatus.observe(this, Observer {
+            if (it) progressBar.visibility = View.VISIBLE
+            else progressBar.visibility = View.GONE
         })
     }
 
