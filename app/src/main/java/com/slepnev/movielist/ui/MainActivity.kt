@@ -11,11 +11,13 @@ import com.slepnev.movielist.R
 import com.slepnev.movielist.model.Movie
 import kotlinx.android.synthetic.main.activity_main.*
 
+const val EXTRA_MOVIE = "EXTRA_MOVIE"
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainActivityViewModel
     private val movies = arrayListOf<Movie>()
-    private val movieAdapter = MovieAdapter(movies)
+    private val movieAdapter = MovieAdapter(movies) {movieItem -> onMovieClick(movieItem) }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,9 +33,7 @@ class MainActivity : AppCompatActivity() {
         rvMovies.adapter = movieAdapter
 
         btnSubmit.setOnClickListener {
-            //viewModel.getMovies(etYear.text.toString())
-            val intent = Intent(this, DetailsActivity::class.java)
-            startActivity(intent)
+            viewModel.getMovies(etYear.text.toString())
         }
     }
 
@@ -47,5 +47,11 @@ class MainActivity : AppCompatActivity() {
         viewModel.error.observe(this, Observer {
             Toast.makeText(this, it, Toast.LENGTH_LONG).show()
         })
+    }
+
+    private fun onMovieClick(movieItem: Movie) {
+        val intent = Intent(this, DetailsActivity::class.java)
+        intent.putExtra(EXTRA_MOVIE, movieItem)
+        startActivityForResult(intent, 100)
     }
 }

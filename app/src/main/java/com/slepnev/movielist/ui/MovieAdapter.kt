@@ -10,7 +10,9 @@ import com.slepnev.movielist.R
 import com.slepnev.movielist.model.Movie
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter(private val movies: List<Movie>,
+                   private val onClick: (Movie) -> Unit
+                   ) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     private lateinit var context: Context
 
@@ -30,6 +32,12 @@ class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<Movie
     }
 
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
+        init {
+            itemView.setOnClickListener {
+                onClick(movies[adapterPosition])
+            }
+        }
+
         fun bind(movie: Movie, number: Int) {
             itemView.tvNumber.text = "$number."
             Glide.with(context).load(movie.getPosterUrl()).into(itemView.ivPoster)

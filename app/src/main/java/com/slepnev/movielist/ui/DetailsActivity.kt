@@ -3,11 +3,15 @@ package com.slepnev.movielist.ui
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.slepnev.movielist.R
+import com.slepnev.movielist.model.Movie
 import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity : AppCompatActivity() {
+
+    private lateinit var movie: Movie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +23,15 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        movie = intent.extras?.getParcelable(EXTRA_MOVIE)!!
+
+        tvTitle.text = movie.title
+        Glide.with(this).load(movie.getPosterUrl()).into(ivPoster)
+        Glide.with(this).load(movie.getBackdropUrl()).into(ivBackdrop)
+        tvRating.text = movie.rating.toString()
+        tvReleaseDate.text = "Release: ${movie.releaseDate}"
+        tvOverview.text = movie.overview
+
         var isShow = true
         var scrollRange = -1
         appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { barLayout, verticalOffset ->
@@ -26,7 +39,7 @@ class DetailsActivity : AppCompatActivity() {
                 scrollRange = barLayout?.totalScrollRange!!
             }
             if (scrollRange + verticalOffset == 0){
-                collapsingToolbarLayout.title = "Title Collapse"
+                collapsingToolbarLayout.title = movie.title
                 collapsingToolbarLayout.setCollapsedTitleTextColor(Color.parseColor("#FFFFFFFF"))
                 isShow = true
             } else if (isShow){
@@ -34,5 +47,6 @@ class DetailsActivity : AppCompatActivity() {
                 isShow = false
             }
         })
+
     }
 }
