@@ -1,5 +1,6 @@
 package com.slepnev.movielist.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -30,7 +31,9 @@ class MainActivity : AppCompatActivity() {
         rvMovies.adapter = movieAdapter
 
         btnSubmit.setOnClickListener {
-            viewModel.getMovies(etYear.text.toString())
+            //viewModel.getMovies(etYear.text.toString())
+            val intent = Intent(this, DetailsActivity::class.java)
+            startActivity(intent)
         }
     }
 
