@@ -13,6 +13,6 @@ data class Movie(
     @SerializedName("vote_average") var rating: Float,
     @SerializedName("overview") var overview: String
 ) :Parcelable {
-    fun getBackdropUrl() = "https://image.tmdb.org/t/p/w300/$backdropImage"
+    fun getBackdropUrl() = "https://image.tmdb.org/t/p/w500/$backdropImage"
     fun getPosterUrl() = "https://image.tmdb.org/t/p/w185/$posterImage"
 }
